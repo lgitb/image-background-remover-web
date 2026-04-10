@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 const REMOVE_BG_API_KEY = process.env.REMOVE_BG_API_KEY;
 
 export async function POST(request: NextRequest) {
@@ -17,13 +19,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Convert base64 to blob
+    // Convert base64 to Uint8Array (Edge-compatible)
     const base64Data = image.split(",")[1];
-    const imageBuffer = Buffer.from(base64Data, "base64");
+    const binaryString = atob(base64Data);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
 
     // Call Remove.bg API
     const formData = new FormData();
-    formData.append("image_file", new Blob([imageBuffer]), "image.png");
+    formData.append("image_file", new Blob([bytes]), "image.png");
     formData.append("size", "auto");
     formData.append("format", "png");
 
@@ -54,7 +60,12 @@ export async function POST(request: NextRequest) {
 
     // Get result as blob
     const resultBuffer = await response.arrayBuffer();
-    const resultBase64 = Buffer.from(resultBuffer).toString("base64");
+    const resultBytes = new Uint8Array(resultBuffer);
+    let resultBinary = "";
+    for (let i = 0; i < resultBytes.length; i++) {
+      resultBinary += String.fromCharCode(resultBytes[i]);
+    }
+    const resultBase64 = btoa(resultBinary);
     const resultDataUrl = `data:image/png;base64,${resultBase64}`;
 
     return NextResponse.json({

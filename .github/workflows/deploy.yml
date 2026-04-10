@@ -23,8 +23,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build
-        run: pnpm build
+      - name: Build for Cloudflare Pages
+        run: pnpm pages:build
         env:
           REMOVE_BG_API_KEY: ${{ secrets.REMOVE_BG_API_KEY }}
 
@@ -34,5 +34,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: image-bg-remover
-          directory: .next
+          directory: .vercel/output/static
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
