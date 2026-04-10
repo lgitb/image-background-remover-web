@@ -113,12 +113,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 py-6">
           <h1 className="text-2xl font-bold text-gray-900">图像背景去除</h1>
-          <p className="text-gray-600 mt-1">简单、快速、免费的在线背景去除工具</p>
+          <p className="text-gray-500 mt-1">简单、快速、免费的在线背景去除工具</p>
         </div>
       </header>
 
@@ -149,7 +149,7 @@ export default function Home() {
             <p className="text-lg font-medium text-gray-700 mb-2">
               点击或拖拽上传图片
             </p>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-500">
               支持 JPG、PNG、WebP 格式，最大 10MB
             </p>
           </div>
@@ -171,7 +171,7 @@ export default function Home() {
                     className="w-full h-auto"
                   />
                 </div>
-                <p className="text-sm text-gray-600 mt-2">
+                <p className="text-sm text-gray-500 mt-2">
                   文件大小: {formatFileSize(originalSize)}
                 </p>
               </div>
@@ -208,7 +208,7 @@ export default function Home() {
                   )}
                 </div>
                 {resultImage && (
-                  <p className="text-sm text-gray-600 mt-2">
+                  <p className="text-sm text-gray-500 mt-2">
                     文件大小: {formatFileSize(resultSize)}
                   </p>
                 )}
@@ -262,7 +262,7 @@ export default function Home() {
             </div>
 
             {/* Tips */}
-            <p className="text-center text-sm text-gray-600">
+            <p className="text-center text-sm text-gray-500">
               💡 处理后的图片为透明背景 PNG 格式
             </p>
           </div>
@@ -271,7 +271,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-gray-200 mt-12">
-        <div className="max-w-4xl mx-auto px-4 py-6 text-center text-sm text-gray-600">
+        <div className="max-w-4xl mx-auto px-4 py-6 text-center text-sm text-gray-500">
           <p>隐私保护：图片仅在服务器处理，不存储，不分享</p>
         </div>
       </footer>
